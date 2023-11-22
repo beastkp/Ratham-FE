@@ -18,13 +18,12 @@ const Slot = (props) => {
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday"];
 
-  // console.log(choice);
   useEffect(()=>{
     if(choice.time && choice.day){
       dispatch(setResponse(choice));
       props.actions.schedule(choice);
     }
-  },[choice.time])
+  },[choice.time,choice.day])
 
 
   return (

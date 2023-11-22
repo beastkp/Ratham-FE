@@ -26,9 +26,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleHello = () => {
-    const botMessage = createChatBotMessage("Welcome to Student info System. I am here to assist you in resolving your queries", {
-      widget: "gotit",
-    });
+    const botMessage = createChatBotMessage(
+      "Welcome to Student info System. I am here to assist you in resolving your queries",
+      {
+        widget: "gotit",
+      }
+    );
 
     setState((prev) => ({
       ...prev,
@@ -56,23 +59,36 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const schedule = ({day,time})=>{
-    const clientMessage = createClientMessage(`On ${day} at ${time}`)
+  const schedule = ({ day, time }) => {
+    const clientMessage = createClientMessage(`On ${day} at ${time}`);
+    updateState(clientMessage);
+    detail_Name();
+  };
+  const detail_Name = () => {
+    const botMessage = createChatBotMessage("Enter your Name");
+    updateState(botMessage, "Name");
+  };
+  const detail_Age = () => {
+    const botMessage = createChatBotMessage("Enter your Age");
+    updateState(botMessage,"Age");
+  };
+  const gotitResponse = () => {
+    const clientMessage = createClientMessage("Got it");
+
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, clientMessage],
     }));
-    handleChoice();
-  }
-  const gotitResponse = ()=>{
-    const clientMessage = createClientMessage("Got it")
-    
-    setState((prev)=>({
-      ...prev,
-      messages:[...prev.messages,clientMessage]
-    }))
     handleSlot();
-  }
+  };
+
+  const updateState = (message, checker) => {
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, message],
+      checker,
+    }));
+  };
   return (
     <div>
       {React.Children.map(children, (child) => {
@@ -82,6 +98,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleDog,
             schedule,
             gotitResponse,
+            handleChoice,
+            detail_Name,
+            detail_Age,
           },
         });
       })}

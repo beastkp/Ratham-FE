@@ -3,6 +3,7 @@ import DogPicture from "../Components/DogPicture.jsx";
 import Slot from "../Components/Slot.jsx";
 import Gotit from "../Components/Gotit.jsx";
 import Redirect from "../Components/Redirect.jsx";
+import Details from "../Components/Details.jsx";
 
 const botname = "Brian";
 const config = {
@@ -14,6 +15,10 @@ const config = {
     //   widget: "overview",
     // }),
   ],
+  state: {
+    checker: null,
+  },
+
   widgets: [
     {
       widgetName: "dogPicture",
@@ -33,11 +38,15 @@ const config = {
       widgetName: "Redirection",
       widgetFunc: (props) => <Redirect {...props} />,
     },
+    {
+      widgetName: "Name",
+      widgetFunc: (props) => <Details {...props} />,
+    },
   ],
   customComponents: {
     header: () => (
       <div className="bg-slate-200 p-3 border-r-2">Student Chatbot</div>
-    )
+    ),
   },
 };
 

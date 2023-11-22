@@ -5,8 +5,8 @@ const Redirect = () => {
   const Navigate = useNavigate();
   const [countdown, setCountdown] = useState(5);
   useEffect(() => {
-    // Set a 10-second delay before redirecting
-    const delay = 5000; // 10 seconds in milliseconds
+    // Set a 5-second delay before redirecting
+    const delay = 5000; // 5 seconds in milliseconds
 
     const intervalId = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
@@ -28,7 +28,7 @@ const Redirect = () => {
 
   return (
     <header className="text-black bg-slate-200 p-2">
-      Redirecting to home page in {countdown} seconds...
+      Thank you. In {countdown} seconds, bot will exit
     </header>
   );
 }

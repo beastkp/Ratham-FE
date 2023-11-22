@@ -1,9 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
+import { setName,setAge } from "../redux/features/userSlice";
+import { useDispatch } from "react-redux";
 
 const MessageParser = ({ children, actions }) => {
-  // console.log(children)
+  const dispatch = useDispatch();
+  console.log(children)
+  let {checker}= children.props.state;
   const parse = (message) => {
     // console.log(message)
+    if(checker === "Name" && message){
+      dispatch(setName(message));
+      actions.detail_Age();
+    }
+    if(checker === "Age" && Number(message)){
+      dispatch(setAge(message));
+      actions.handleChoice();
+    }
     if (message.toLowerCase().includes("hello".toLowerCase()) || message.toLowerCase().includes("hi".toLowerCase())){
       actions.handleHello();
     }
